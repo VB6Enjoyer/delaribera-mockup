@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De La Ribera Viajes - Descubra su próximo destino</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(52, 152, 219, 0.1);
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            color: white;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 50%, #1abc9c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        #logo-image {
+            width: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            color: white;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #3498db 0%, #1abc9c 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.4) 0%, rgba(41, 128, 185, 0.3) 50%, rgba(26, 188, 156, 0.2) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.6);
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #ecf0f1 0%, #bdc3c7 50%, #d5dbdb 100%);
+            background-image: url(./content/fondo.jpg);
+            background-size: cover;
+            background-position: 0px;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(52, 152, 219, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #3498db 0%, #1abc9c 100%);
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(52, 152, 219, 0.2);
+        }
+
+        .about-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .about-card p {
+            color: #5a6c7d;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ddedf8 0%, #c8e9ff 50%, #b4fff0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #33363a;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Booking Form */
+        .booking {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 50%, #1abc9c 100%);
+            background-image: url(./content/viaje.jpg);
+            background-size: cover;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .booking-form {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 3.5rem;
+            border-radius: 25px;
+            margin-top: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 15px 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            color: #2c3e50;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            border-color: #f39c12;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(243, 156, 18, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(243, 156, 18, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #74b9ff;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            display: block;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #74b9ff;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .booking-form {
+                padding: 2.5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .about-card,
+            .booking-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo"><img id="logo-image" src="./content/logo.png" alt="De La Ribera Viajes"></div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Sobre Nosotros</a></li>
+                <li><a href="#reservas">Reservas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <video class="hero-video" autoplay muted loop>
+            <source src="./content/video.mp4?width=1920&height=1080" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Tu próxima aventura te espera</h1>
+            <p>Descubre el mundo con De La Ribera Viajes y preparate para crear experiencias
+                inolvidables</p>
+            <a href="#reservas" class="cta-button">Planifica tu viaje</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir DLR?</h2>
+            <p class="section-subtitle">Somos más que una agencia de viajes. Somos creadores de experiencias únicas que
+                perduran en tu memoria para siempre.</p>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <img src="./content/experiencia.png?height=200&width=300" alt="Experiencia personalizada">
+                    <h3>Experiencia Personalizada</h3>
+                    <p>Cada viaje es único, como tú. Diseñamos itinerarios a medida que se adaptan a tus gustos,
+                        presupuesto y sueños.</p>
+                </div>
+                <div class="about-card">
+                    <img src="./content/exclusivo.jpg?height=200&width=300" alt="Destinos exclusivos">
+                    <h3>Destinos Exclusivos</h3>
+                    <p>Acceso a lugares únicos y experiencias auténticas que no encontrarás en ningún otro lado.
+                        Descubre lo extraordinario.</p>
+                </div>
+                <div class="about-card">
+                    <img src="./content/atencion.jpg?height=200&width=300" alt="Soporte 24/7">
+                    <h3>Soporte 24/7</h3>
+                    <p>Estamos contigo en cada paso del camino. Nuestro equipo está disponible las 24 horas para que
+                        viajes con total tranquilidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="reservas">
+        <div class="container">
+            <h2 class="section-title">Planifica tu próximo viaje</h2>
+            <p class="section-subtitle" style="color: rgba(0, 0, 0)">Completa el formulario y nos pondremos en contacto
+                contigo para crear la experiencia perfecta.</p>
+
+            <form class="booking-form" id="bookingForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="destino">Destino deseado</label>
+                        <select id="destino" name="destino" required>
+                            <option value="">Selecciona un destino</option>
+                            <option value="europa">Europa</option>
+                            <option value="asia">Asia</option>
+                            <option value="america-norte">América del Norte</option>
+                            <option value="america-sur">América del Sur</option>
+                            <option value="africa">África</option>
+                            <option value="oceania">Oceanía</option>
+                            <option value="caribe">Caribe</option>
+                            <option value="otro">Otro destino</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fechaSalida">Fecha de salida</label>
+                        <input type="date" id="fechaSalida" name="fechaSalida" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fechaRegreso">Fecha de regreso</label>
+                        <input type="date" id="fechaRegreso" name="fechaRegreso" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pasajeros">Cantidad de pasajeros</label>
+                        <select id="pasajeros" name="pasajeros" required>
+                            <option value="">Selecciona</option>
+                            <option value="1">1 pasajero</option>
+                            <option value="2">2 pasajeros</option>
+                            <option value="3">3 pasajeros</option>
+                            <option value="4">4 pasajeros</option>
+                            <option value="5+">5 o más pasajeros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">Categoría de vuelo</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Selecciona categoría</option>
+                            <option value="economica">Económica</option>
+                            <option value="premium">Premium Economy</option>
+                            <option value="business">Business</option>
+                            <option value="primera">Primera Clase</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="presupuesto">Presupuesto aproximado (USD)</label>
+                        <select id="presupuesto" name="presupuesto">
+                            <option value="">Selecciona rango</option>
+                            <option value="1000-3000">$1,000 - $3,000</option>
+                            <option value="3000-5000">$3,000 - $5,000</option>
+                            <option value="5000-10000">$5,000 - $10,000</option>
+                            <option value="10000+">Más de $10,000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin: 10px 0px">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group" style="margin: 10px 0px">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group" style="margin: 10px 0px">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="form-group" style="margin: 20px 0px">
+                    <label for="comentarios">Comentarios adicionales</label>
+                    <textarea id="comentarios" name="comentarios"
+                        placeholder="Cuéntanos sobre tus preferencias, intereses especiales, o cualquier requerimiento particular..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Solicitar cotización</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>De La Ribera Viajes</h3>
+                    <p>Creamos experiencias de viaje únicas e inolvidables para cada
+                        uno de nuestros clientes.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📍 Calle del Caminante 20, Edificio Puerta Norte I, Nordelta</p>
+                    <p>📧 contacto@delaribera.com.ar</p>
+                    <p>📞 11 5037 9017</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Horarios de atención</h3>
+                    <p>Lunes a Viernes: 9:00 - 18:00</p>
+                    <p>Sábados: 9:00 - 13:00</p>
+                    <p>Domingos: Cerrado</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Síguenos</h3>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 De La Ribera Viajes. Todos los derechos reservados. | Legajo EVyT: 12345</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // Simple validation
+            if (!data.destino || !data.fechaSalida || !data.fechaRegreso || !data.nombre || !data.email) {
+                alert('Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+
+            // Check if return date is after departure date
+            if (new Date(data.fechaRegreso) <= new Date(data.fechaSalida)) {
+                alert('La fecha de regreso debe ser posterior a la fecha de salida.');
+                return;
+            }
+
+            // Simulate form submission
+            alert('¡Gracias por tu consulta! Nos pondremos en contacto contigo dentro de las próximas 24 horas para comenzar a planificar tu viaje soñado.');
+
+            // Reset form
+            this.reset();
+        });
+
+        // Set minimum date to today for date inputs
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('fechaSalida').setAttribute('min', today);
+        document.getElementById('fechaRegreso').setAttribute('min', today);
+
+        // Update minimum return date when departure date changes
+        document.getElementById('fechaSalida').addEventListener('change', function () {
+            const departureDate = this.value;
+            document.getElementById('fechaRegreso').setAttribute('min', departureDate);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0)';
+            }
+        });
+
+        // Enhanced scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.about-card, .booking-form');
+            animatedElements.forEach(el => {
+                el.classList.add('fade-in');
+                observer.observe(el);
+            });
+        });
+
+        // Enhanced header scroll effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > 100) {
+                header.style.background = 'rgba(57, 152, 215, 0.5)';
+                header.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1);';
+                header.style.boxShadow = '0 8px 32px rgba(52, 152, 219, 0.1)';
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Add smooth reveal animation to cards
+        const cards = document.querySelectorAll('.about-card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.2}s`;
+        });
+    </script>
+</body>
+
+</html>
